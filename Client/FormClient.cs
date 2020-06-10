@@ -13,11 +13,16 @@ namespace Client
 {
     public partial class FormClient : MaterialSkin.Controls.MaterialForm
     {
+        private string ImgPath;
+
         public FormClient()
         {
             InitializeComponent();
 
             ChangeSkin();
+
+            pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
+
         }
 
         private void ChangeSkin()
@@ -26,6 +31,20 @@ namespace Client
             materialSkinManager.AddFormToManage(this);
             materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
             materialSkinManager.ColorScheme = new ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE);
+        }
+
+        private void btnSelectImg_Click(object sender, EventArgs e)
+        {
+            ImgPath = Util.SelectImg();
+            if (!string.IsNullOrEmpty(ImgPath))
+            {
+                DisplayImg();
+            }
+        }
+
+        private void DisplayImg()
+        {
+            pictureBox.Image = Image.FromFile(ImgPath);
         }
     }
 }
