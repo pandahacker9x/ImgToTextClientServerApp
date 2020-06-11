@@ -57,6 +57,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Server.cs" />
     <EmbeddedResource Include="FormServerControl.resx">
       <DependentUpon>FormServerControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -82,6 +83,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Libs\Share.csproj">
+      <Project>{dac4e91d-07cd-4a50-afe0-d7a75363253a}</Project>
+      <Name>Share</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

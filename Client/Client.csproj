@@ -64,6 +64,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Client.cs" />
     <Compile Include="FormClient.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -111,6 +112,12 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Libs\Share.csproj">
+      <Project>{dac4e91d-07cd-4a50-afe0-d7a75363253a}</Project>
+      <Name>Share</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\text_image_example.png" />

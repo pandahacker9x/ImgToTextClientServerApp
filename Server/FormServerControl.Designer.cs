@@ -1,4 +1,4 @@
-﻿namespace ImgToTextClientServerApp
+﻿namespace ImgToTextServerApp
 {
     partial class FormServerControl
     {
@@ -28,60 +28,35 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnStop = new MaterialSkin.Controls.MaterialFlatButton();
-            this.btnStart = new MaterialSkin.Controls.MaterialFlatButton();
+            this.btnStartStop = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // btnStop
+            // btnStartStop
             // 
-            this.btnStop.AutoSize = true;
-            this.btnStop.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnStop.BackColor = System.Drawing.SystemColors.ButtonShadow;
-            this.btnStop.Depth = 0;
-            this.btnStop.Location = new System.Drawing.Point(350, 210);
-            this.btnStop.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnStop.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btnStop.Name = "btnStop";
-            this.btnStop.Primary = false;
-            this.btnStop.Size = new System.Drawing.Size(66, 36);
-            this.btnStop.TabIndex = 0;
-            this.btnStop.Text = "Stop";
-            this.btnStop.UseVisualStyleBackColor = false;
-            // 
-            // btnStart
-            // 
-            this.btnStart.AutoSize = true;
-            this.btnStart.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnStart.BackColor = System.Drawing.Color.Silver;
-            this.btnStart.Depth = 0;
-            this.btnStart.Location = new System.Drawing.Point(350, 133);
-            this.btnStart.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnStart.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btnStart.Name = "btnStart";
-            this.btnStart.Primary = false;
-            this.btnStart.Size = new System.Drawing.Size(78, 36);
-            this.btnStart.TabIndex = 1;
-            this.btnStart.Text = "Start";
-            this.btnStart.UseVisualStyleBackColor = false;
+            this.btnStartStop.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnStartStop.Location = new System.Drawing.Point(241, 188);
+            this.btnStartStop.Name = "btnStartStop";
+            this.btnStartStop.Size = new System.Drawing.Size(322, 44);
+            this.btnStartStop.TabIndex = 1;
+            this.btnStartStop.Text = "Start";
+            this.btnStartStop.UseVisualStyleBackColor = true;
+            this.btnStartStop.Click += new System.EventHandler(this.btnStartStop_Click);
             // 
             // FormServerControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 361);
-            this.Controls.Add(this.btnStart);
-            this.Controls.Add(this.btnStop);
+            this.Controls.Add(this.btnStartStop);
             this.Name = "FormServerControl";
             this.Text = "Control Server";
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private MaterialSkin.Controls.MaterialFlatButton btnStop;
-        private MaterialSkin.Controls.MaterialFlatButton btnStart;
+        private System.Windows.Forms.Button btnStartStop;
     }
 }
 

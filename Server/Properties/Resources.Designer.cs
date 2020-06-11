@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ImgToTextClientServerApp.Properties
+namespace ImgToTextServerApp.Properties
 {
 
 

@@ -3,7 +3,7 @@ using System.IO;
 using System.Text;
 using System.Windows.Forms;
 
-namespace Client
+namespace ImgToTextClientApp
 {
     internal class Util
     {
@@ -36,7 +36,7 @@ namespace Client
 
         internal static string SelectImg()
         {
-            try
+            try 
             {
                 var dialog = new OpenFileDialog();
                 dialog.Filter =

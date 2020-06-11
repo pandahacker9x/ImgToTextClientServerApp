@@ -4,25 +4,32 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Client
+namespace ImgToTextClientApp
 {
     public partial class FormClient : MaterialSkin.Controls.MaterialForm
     {
-        private string ImgPath;
+        private string imgPath;
+        private Client client;
 
         public FormClient()
         {
             InitializeComponent();
+            
+            InitUI();
 
-            ChangeSkin();
+            InitClient();
+        }
 
+        private void InitUI()
+        {
             pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
-
+            ChangeSkin();
         }
 
         private void ChangeSkin()
@@ -33,18 +40,47 @@ namespace Client
             materialSkinManager.ColorScheme = new ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE);
         }
 
+        private void InitClient()
+        {
+            client = new Client();
+            client.OnConnectionFailed += Client_OnConnectionFailed;
+            client.ConnectToServer();
+        }
+
+        private void Client_OnConnectionFailed()
+        {
+            ShowMsg("Failed to connect server");
+            btnSelectImg.Enabled = false;
+        }
+
+        private void ShowMsg(string msg)
+        {
+            MessageBox.Show(msg);
+        }
+
         private void btnSelectImg_Click(object sender, EventArgs e)
         {
-            ImgPath = Util.SelectImg();
-            if (!string.IsNullOrEmpty(ImgPath))
+            imgPath = Util.SelectImg();
+            if (!string.IsNullOrEmpty(imgPath))
             {
                 DisplayImg();
+                btnConvert.Enabled = true;
             }
         }
 
         private void DisplayImg()
         {
-            pictureBox.Image = Image.FromFile(ImgPath);
+            Image img = null;
+            using (var fileStream = File.OpenRead(imgPath))
+            {
+                img = Image.FromStream(fileStream);
+            }
+            pictureBox.Image = img;
+        }
+
+        private void btnConvert_Click(object sender, EventArgs e)
+        {
+            client.SendImg(imgPath);
         }
     }
 }
