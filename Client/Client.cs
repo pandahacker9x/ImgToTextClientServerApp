@@ -17,14 +17,16 @@ namespace ImgToTextClientApp
         public event ConnectionFailed OnConnectionFailed;
 
         public Client()
-        {
+        { 
         }
 
         internal void SendImg(string imgPath)
         {
             if (File.Exists(imgPath))
             {
-                FileHelper.SendFile(networkStream, imgPath);
+                ConnectToServer();
+                Sender.SendFile(networkStream, imgPath);
+                Disconnect();
             }
         }
 
@@ -33,13 +35,21 @@ namespace ImgToTextClientApp
             try
             {
                 tcpClient = new TcpClient(
-                    Constants.SERVER_IP, Constants.SERVER_PORT);
+                    Constants.SERVER_IP, 
+                    Constants.SERVER_PORT);
+
                 networkStream = tcpClient.GetStream();
             }
             catch (Exception)
             {
                 OnConnectionFailed.Invoke();
+                throw;
             }
+        }
+
+        internal void Disconnect()
+        {
+            tcpClient.Close();
         }
     }
 }

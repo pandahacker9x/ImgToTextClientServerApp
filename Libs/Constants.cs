@@ -13,5 +13,8 @@ namespace Share
         public static readonly string SERVER_FOLDER_PATH_TO_SAVE 
             = "c:/tmp/upload/";
         public static readonly int FRAME = 1024;
+        public static readonly int EXTENSION_FILE_BYTE_SIZE = 4;
+        public static readonly string UNKONW_EXTENSION = ".unk";
+
     }
 }

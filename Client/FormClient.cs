@@ -20,9 +20,7 @@ namespace ImgToTextClientApp
         public FormClient()
         {
             InitializeComponent();
-            
             InitUI();
-
             InitClient();
         }
 
@@ -44,12 +42,11 @@ namespace ImgToTextClientApp
         {
             client = new Client();
             client.OnConnectionFailed += Client_OnConnectionFailed;
-            client.ConnectToServer();
         }
 
         private void Client_OnConnectionFailed()
         {
-            ShowMsg("Failed to connect server");
+            ShowMsg("Failed to connect to server");
             btnSelectImg.Enabled = false;
         }
 

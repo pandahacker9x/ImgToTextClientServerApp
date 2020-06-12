@@ -1,5 +1,6 @@
 ﻿
 using Share;
+using Share;
 using System;
 using System.Diagnostics;
 using System.Net;
@@ -48,12 +49,13 @@ namespace ImgToTextServerApp
                 ((TcpClient)client).GetStream());
         }
 
-
         private string ReceiveImg(NetworkStream networkStream)
         {
-            var imgPath = FileHelper.CreateRandomFileName(Constants.SERVER_FOLDER_PATH_TO_SAVE);
-            FileHelper.ReceiveFile(networkStream, imgPath);
-            return imgPath;
+            var imgFileExtention = Receiver.ReceiveString(networkStream, Constants.EXTENSION_FILE_BYTE_SIZE);
+            var pathToSave = Sender.CreateRandomFileName(
+                Constants.SERVER_FOLDER_PATH_TO_SAVE, imgFileExtention);
+            Receiver.ReceiveFileContent(networkStream, pathToSave);
+            return pathToSave;
         }
 
         internal void Stop()

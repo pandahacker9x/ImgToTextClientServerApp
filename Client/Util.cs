@@ -40,7 +40,7 @@ namespace ImgToTextClientApp
             {
                 var dialog = new OpenFileDialog();
                 dialog.Filter =
-                    "(Image files *.png, *.jpg)|*.png;*.jpg|All files (*.*)|*.*";
+                    "(Image files *.png, *.jpg)|*.png;*.jpg";
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
                     return dialog.FileName;
