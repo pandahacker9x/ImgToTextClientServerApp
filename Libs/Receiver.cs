@@ -38,9 +38,9 @@ namespace Share
 
         public static string ReceiveString(NetworkStream networkStream, int stringByteSize = 1024)
         {
-            byte[] stringBytes = new byte[Constants.EXTENSION_FILE_BYTE_SIZE];
-            int size = networkStream.Read(stringBytes, 0, Constants.EXTENSION_FILE_BYTE_SIZE);
-            return Utils.ToString(stringBytes, size); ;
+            byte[] stringBytes = new byte[stringByteSize];
+            int size = networkStream.Read(stringBytes, 0, stringByteSize);
+            return Utils.ToString(stringBytes, size); 
         }
     }
 }

@@ -83,6 +83,7 @@
             this.Controls.Add(this.richTextBox);
             this.Controls.Add(this.progressBar);
             this.Name = "FormTextReponseDisplay";
+            this.Sizable = false;
             this.Text = "Text";
             this.ResumeLayout(false);
 

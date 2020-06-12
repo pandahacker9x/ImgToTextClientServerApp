@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Share
 {
-    internal class Utils
+    public class Utils
     {
         internal static byte[] ToBytes(string str)
         {
@@ -26,5 +26,12 @@ namespace Share
             if (extension.Length != 4) extension = Constants.UNKONW_EXTENSION;
             return extension;
         }
+
+        public static string GenerateUniqueFilePath(string folderPath, string fileExtention)
+        {
+            var uniqueFileName = Guid.NewGuid().ToString();
+            return Constants.SERVER_FOLDER_PATH_TO_SAVE + uniqueFileName + fileExtention;
+        }
+
     }
 }

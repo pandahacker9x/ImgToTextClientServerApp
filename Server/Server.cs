@@ -3,6 +3,7 @@ using Share;
 using Share;
 using System;
 using System.Diagnostics;
+using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
@@ -47,13 +48,13 @@ namespace ImgToTextServerApp
         {
             var networkStream = ((TcpClient)client).GetStream();
             string imgPath = ReceiveImg(networkStream);
-            Sender.SendString(networkStream, "helloo");
+            Sender.SendString(networkStream, imgPath);
         }
 
         private string ReceiveImg(NetworkStream networkStream)
         {
             var imgFileExtention = Receiver.ReceiveString(networkStream, Constants.EXTENSION_FILE_BYTE_SIZE);
-            var pathToSave = Sender.CreateRandomFileName(
+            var pathToSave = Utils.GenerateUniqueFilePath(
                 Constants.SERVER_FOLDER_PATH_TO_SAVE, imgFileExtention);
             Receiver.ReceiveFileContent(networkStream, pathToSave);
             return pathToSave;

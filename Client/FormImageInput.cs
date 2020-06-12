@@ -57,13 +57,24 @@ namespace ImgToTextClientApp
 
         private void Client_OnConnectionFailed()
         {
-            ShowMsg("Failed to connect to server");
-            btnSelectImg.Enabled = false;
+            Invoke((MethodInvoker)delegate {
+                ShowConfirmDialog("Error", 
+                    "Failed to connect to server. Would you like to reconnect", 
+                    () => { }, 
+                    () => { formTextReponseDisplay.Hide(); });
+                btnSelectImg.Enabled = false;
+            });
         }
 
-        private void ShowMsg(string msg)
+        delegate void ComfirmAction();
+        private void ShowConfirmDialog(string title, string msg, 
+            ComfirmAction onYes, ComfirmAction onNo)
         {
-            MessageBox.Show(msg);
+            var result = MessageBox
+                .Show(msg, title, MessageBoxButtons.YesNo);
+            if (result == DialogResult.Yes)
+                onYes.Invoke();
+            else onNo.Invoke();
         }
 
         private void btnSelectImg_Click(object sender, EventArgs e)

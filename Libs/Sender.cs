@@ -44,9 +44,5 @@ namespace Share
             fileStream.Close();
         }
 
-        public static string CreateRandomFileName(string folderPath, string fileExtention)
-        {
-            return Constants.SERVER_FOLDER_PATH_TO_SAVE + "img" + fileExtention;
-        }
     }
 }
