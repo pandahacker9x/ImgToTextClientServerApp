@@ -15,19 +15,29 @@ namespace ImgToTextClientApp
 
         public delegate void ConnectionFailed();
         public event ConnectionFailed OnConnectionFailed;
+        
+        public delegate void ImageToTextResponse(string text);
+        public event ImageToTextResponse OnImageToTextResponse;
 
         public Client()
         { 
         }
 
-        internal void SendImg(string imgPath)
+        internal void RequestImgToText(string imgPath)
         {
             if (File.Exists(imgPath))
             {
                 ConnectToServer();
                 Sender.SendFile(networkStream, imgPath);
+                ReceiveResponseText();
                 Disconnect();
             }
+        }
+
+        private void ReceiveResponseText()
+        {
+            var responseText = Receiver.ReceiveString(networkStream);
+            OnImageToTextResponse.Invoke(responseText);
         }
 
         internal void ConnectToServer()
@@ -43,7 +53,6 @@ namespace ImgToTextClientApp
             catch (Exception)
             {
                 OnConnectionFailed.Invoke();
-                throw;
             }
         }
 

@@ -45,8 +45,9 @@ namespace ImgToTextServerApp
 
         private void HandleRequestsAsync(object client)
         {
-            string imgPath = ReceiveImg(
-                ((TcpClient)client).GetStream());
+            var networkStream = ((TcpClient)client).GetStream();
+            string imgPath = ReceiveImg(networkStream);
+            Sender.SendString(networkStream, "helloo");
         }
 
         private string ReceiveImg(NetworkStream networkStream)

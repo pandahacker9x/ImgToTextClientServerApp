@@ -15,7 +15,7 @@ namespace Share
         {
             SendFileType(networkStream, path);
             SendFileContent(networkStream, path);
-            networkStream.Close();
+            //networkStream.Close();
         }
 
         private static void SendFileType(NetworkStream networkStream, string path)
@@ -23,7 +23,7 @@ namespace Share
             SendString(networkStream, Utils.GetFileExtention(path));
         }
 
-        private static void SendString(NetworkStream networkStream, string str)
+        public static void SendString(NetworkStream networkStream, string str)
         {
             byte[] strBytes = Utils.ToBytes(str);
             networkStream.Write(strBytes, 0, strBytes.Length);

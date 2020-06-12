@@ -23,7 +23,7 @@ namespace Share
 
             byte[] buffer = new byte[Constants.FRAME];
             int readedBytes = -1;
-            while (readedBytes != 0)
+            while (readedBytes != 0 && networkStream.DataAvailable)
             {
                 readedBytes = networkStream.Read(buffer, 0, Constants.FRAME);
                 if (readedBytes != 0)

@@ -12,12 +12,13 @@ using System.Windows.Forms;
 
 namespace ImgToTextClientApp
 {
-    public partial class FormClient : MaterialSkin.Controls.MaterialForm
+    public partial class FormImageInput : MaterialSkin.Controls.MaterialForm
     {
         private string imgPath;
         private Client client;
+        private FormTextReponseDisplay formTextReponseDisplay;
 
-        public FormClient()
+        public FormImageInput()
         {
             InitializeComponent();
             InitUI();
@@ -28,6 +29,7 @@ namespace ImgToTextClientApp
         {
             pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
             ChangeSkin();
+            formTextReponseDisplay = new FormTextReponseDisplay();
         }
 
         private void ChangeSkin()
@@ -42,6 +44,15 @@ namespace ImgToTextClientApp
         {
             client = new Client();
             client.OnConnectionFailed += Client_OnConnectionFailed;
+            client.OnImageToTextResponse += Client_OnImageToTextResponse;        
+        }
+
+        private void Client_OnImageToTextResponse(string text)
+        {
+            Invoke((MethodInvoker)delegate {
+                formTextReponseDisplay.ShowText(text);
+                formTextReponseDisplay.HideProgressBar();
+            });
         }
 
         private void Client_OnConnectionFailed()
@@ -77,7 +88,8 @@ namespace ImgToTextClientApp
 
         private void btnConvert_Click(object sender, EventArgs e)
         {
-            client.SendImg(imgPath);
+            Task.Run(() => client.RequestImgToText(imgPath));
+            formTextReponseDisplay.ShowDialog();
         }
     }
 }

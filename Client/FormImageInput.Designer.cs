@@ -1,6 +1,6 @@
 ﻿namespace ImgToTextClientApp
 {
-    partial class FormClient
+    partial class FormImageInput
     {
         /// <summary>
         /// Required designer variable.
@@ -60,7 +60,6 @@
             this.pictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox.Image = global::Client.Properties.Resources.text_image_example;
             this.pictureBox.Location = new System.Drawing.Point(60, 175);
             this.pictureBox.Name = "pictureBox";
             this.pictureBox.Size = new System.Drawing.Size(685, 317);
