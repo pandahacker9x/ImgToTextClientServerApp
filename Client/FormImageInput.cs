@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -14,7 +15,7 @@ namespace ImgToTextClientApp
 {
     public partial class FormImageInput : MaterialSkin.Controls.MaterialForm
     {
-        private string imgPath;
+        private string selectedImgPath, imgPathToGetText;
         private Client client;
         private FormTextReponseDisplay formTextReponseDisplay;
 
@@ -50,8 +51,8 @@ namespace ImgToTextClientApp
         private void Client_OnImageToTextResponse(string text)
         {
             Invoke((MethodInvoker)delegate {
-                formTextReponseDisplay.ShowText(text);
-                formTextReponseDisplay.HideProgressBar();
+                formTextReponseDisplay.SetText(text);
+                formTextReponseDisplay.SetWaiting(false);
             });
         }
 
@@ -79,27 +80,37 @@ namespace ImgToTextClientApp
 
         private void btnSelectImg_Click(object sender, EventArgs e)
         {
-            imgPath = Util.SelectImg();
-            if (!string.IsNullOrEmpty(imgPath))
+            selectedImgPath = Util.SelectImg();
+            
+            if (!string.IsNullOrEmpty(selectedImgPath))
             {
                 DisplayImg();
-                btnConvert.Enabled = true;
+                btnGetText.Enabled = true;
             }
         }
 
         private void DisplayImg()
         {
             Image img = null;
-            using (var fileStream = File.OpenRead(imgPath))
+            using (var fileStream = File.OpenRead(selectedImgPath))
             {
                 img = Image.FromStream(fileStream);
             }
             pictureBox.Image = img;
         }
 
-        private void btnConvert_Click(object sender, EventArgs e)
+        private void btnGetText_Click(object sender, EventArgs e)
         {
-            Task.Run(() => client.RequestImgToText(imgPath));
+            if (selectedImgPath != imgPathToGetText)
+            {
+                formTextReponseDisplay.SetWaiting(true);
+                Task.Run(() => client.RequestImgToText(selectedImgPath));
+                imgPathToGetText = selectedImgPath;
+            }
+            else
+            {
+                formTextReponseDisplay.SetWaiting(false);
+            }
             formTextReponseDisplay.ShowDialog();
         }
     }

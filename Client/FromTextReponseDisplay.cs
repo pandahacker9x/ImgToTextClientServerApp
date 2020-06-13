@@ -13,6 +13,7 @@ namespace ImgToTextClientApp
 {
     public partial class FormTextReponseDisplay : MaterialSkin.Controls.MaterialForm
     {
+        private bool isWaiting = true;
 
         public FormTextReponseDisplay()
         {
@@ -33,16 +34,24 @@ namespace ImgToTextClientApp
             materialSkinManager.ColorScheme = new ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE);
         }
 
-        internal void ShowText(string text)
+        internal void SetText(string text)
         {
-            richTextBox.Visible = true;
             richTextBox.Text = text;
         }
 
-        internal void HideProgressBar()
+        internal void SetWaiting(bool waiting)
         {
-            progressBar.Hide();
+            if (isWaiting == waiting) return;
+            if (waiting)
+            {
+                progressBar.Show();
+                richTextBox.Visible = false;
+            } else
+            {
+                progressBar.Hide();
+                richTextBox.Visible = true;
+            }
+            isWaiting = waiting;
         }
-
     }
 }

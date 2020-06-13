@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.btnSelectImg = new System.Windows.Forms.Button();
-            this.btnConvert = new System.Windows.Forms.Button();
+            this.btnGetText = new System.Windows.Forms.Button();
             this.pictureBox = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.SuspendLayout();
@@ -44,16 +44,16 @@
             this.btnSelectImg.UseVisualStyleBackColor = true;
             this.btnSelectImg.Click += new System.EventHandler(this.btnSelectImg_Click);
             // 
-            // btnConvert
+            // btnGetText
             // 
-            this.btnConvert.Enabled = false;
-            this.btnConvert.Location = new System.Drawing.Point(397, 109);
-            this.btnConvert.Name = "btnConvert";
-            this.btnConvert.Size = new System.Drawing.Size(131, 38);
-            this.btnConvert.TabIndex = 2;
-            this.btnConvert.Text = "Convert";
-            this.btnConvert.UseVisualStyleBackColor = true;
-            this.btnConvert.Click += new System.EventHandler(this.btnConvert_Click);
+            this.btnGetText.Enabled = false;
+            this.btnGetText.Location = new System.Drawing.Point(397, 109);
+            this.btnGetText.Name = "btnGetText";
+            this.btnGetText.Size = new System.Drawing.Size(131, 38);
+            this.btnGetText.TabIndex = 2;
+            this.btnGetText.Text = "Get text";
+            this.btnGetText.UseVisualStyleBackColor = true;
+            this.btnGetText.Click += new System.EventHandler(this.btnGetText_Click);
             // 
             // pictureBox
             // 
@@ -66,15 +66,15 @@
             this.pictureBox.TabIndex = 0;
             this.pictureBox.TabStop = false;
             // 
-            // FormClient
+            // FormImageInput
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 559);
-            this.Controls.Add(this.btnConvert);
+            this.Controls.Add(this.btnGetText);
             this.Controls.Add(this.btnSelectImg);
             this.Controls.Add(this.pictureBox);
-            this.Name = "FormClient";
+            this.Name = "FormImageInput";
             this.Sizable = false;
             this.Text = "Image To Text App";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
@@ -86,7 +86,7 @@
 
         private System.Windows.Forms.PictureBox pictureBox;
         private System.Windows.Forms.Button btnSelectImg;
-        private System.Windows.Forms.Button btnConvert;
+        private System.Windows.Forms.Button btnGetText;
     }
 }
 
