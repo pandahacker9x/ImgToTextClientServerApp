@@ -21,6 +21,7 @@ namespace ImgToTextServerApp
             server = new Server();
             InitializeComponent();
             ChangeSkin();
+            btnStartStop_Click(null, null);
         }
 
         private void ChangeSkin()

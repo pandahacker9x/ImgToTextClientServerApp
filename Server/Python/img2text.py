@@ -1,9 +1,7 @@
-﻿from pytesseract.scr import pytesseract
-from Pillow.scr.PIL import Image
-
-pytesseract.pytesseract.tesseract_cmd = r'C:\\Users\\LONG\\AppData\\Local\\Tesseract-OCR\\tesseract.exe'
+﻿import extract_text_from_img
 
 def imgTotext(imgPath = ""):
-	open_image = Image.open(imgPath)
-	text = pytesseract.image_to_string(open_image)
+	text = extract_text_from_img.imgTotext(imgPath)
 	return text
+
+

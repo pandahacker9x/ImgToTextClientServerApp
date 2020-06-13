@@ -1,4 +1,6 @@
-﻿using System;
+﻿using IronPython.Hosting;
+using Microsoft.Scripting.Hosting;
+using System;
 using System.IO;
 using System.Text;
 
@@ -33,5 +35,13 @@ namespace Share
             return Constants.SERVER_FOLDER_PATH_TO_SAVE + uniqueFileName + fileExtention;
         }
 
+        public static string ImgToText(string imgPath)
+        {
+            ScriptEngine engine = Python.CreateEngine();
+            var pyFile = @"C:\Users\LONG\Documents\Downloads\ImgToTextApp\ImgToTextClientServerApp\Server\Python\img2text.py";
+            dynamic py = engine.ExecuteFile(pyFile);
+            dynamic text = py.imgTotext(imgPath);
+            return text;
+        }
     }
 }

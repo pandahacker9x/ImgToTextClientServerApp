@@ -48,7 +48,8 @@ namespace ImgToTextServerApp
         {
             var networkStream = ((TcpClient)client).GetStream();
             string imgPath = ReceiveImg(networkStream);
-            Sender.SendString(networkStream, imgPath);
+            string text = Utils.ImgToText(imgPath);
+            Sender.SendString(networkStream, text);
         }
 
         private string ReceiveImg(NetworkStream networkStream)
