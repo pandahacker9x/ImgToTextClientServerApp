@@ -1,13 +1,17 @@
 ﻿using IronPython.Hosting;
 using Microsoft.Scripting.Hosting;
 using System;
+using System.Drawing;
 using System.IO;
+using System.Reflection;
 using System.Text;
+using Tesseract;
 
 namespace Share
 {
     public class Utils
     {
+
         internal static byte[] ToBytes(string str)
         {
             return Encoding.ASCII.GetBytes(str);
@@ -35,13 +39,14 @@ namespace Share
             return Constants.SERVER_FOLDER_PATH_TO_SAVE + uniqueFileName + fileExtention;
         }
 
-        public static string ImgToText(string imgPath)
+        public static string ImgToText(string imgPath) 
         {
-            ScriptEngine engine = Python.CreateEngine();
-            var pyFile = @"C:\Users\LONG\Documents\Downloads\ImgToTextApp\ImgToTextClientServerApp\Server\Python\img2text.py";
-            dynamic py = engine.ExecuteFile(pyFile);
-            dynamic text = py.imgTotext(imgPath);
+            Bitmap img = new Bitmap(imgPath);
+            TesseractEngine engine = new TesseractEngine("./tessdata", "eng", EngineMode.Default);
+            Page page = engine.Process(img, PageSegMode.Auto);
+            string text = page.GetText();
             return text;
+
         }
     }
 }

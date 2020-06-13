@@ -1,6 +1,4 @@
-﻿
-using Share;
-using Share;
+﻿using Share;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -48,6 +46,7 @@ namespace ImgToTextServerApp
         {
             var networkStream = ((TcpClient)client).GetStream();
             string imgPath = ReceiveImg(networkStream);
+
             string text = Utils.ImgToText(imgPath);
             Sender.SendString(networkStream, text);
         }
