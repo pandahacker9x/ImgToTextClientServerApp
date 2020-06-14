@@ -20,6 +20,7 @@ namespace Share
             return Encoding.ASCII.GetString(stringBytes, 0, size);
         }
 
+
         internal static string GetFileExtention(string path)
         {
             var components = Path.GetExtension(path).Split(new[] { '?' });

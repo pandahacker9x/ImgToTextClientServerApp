@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
@@ -14,6 +15,7 @@ namespace ImgToTextClientApp
                 var dialog = new OpenFileDialog();
                 dialog.Filter =
                     "(Image files *.png, *.jpg)|*.png;*.jpg";
+                dialog.InitialDirectory = GetRootDirPath() + "\\Resources";
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
                     return dialog.FileName;
@@ -23,6 +25,11 @@ namespace ImgToTextClientApp
             {
             }
             return "";
+        }
+
+        private static string GetRootDirPath()
+        {
+            return Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
         }
     }
 }
