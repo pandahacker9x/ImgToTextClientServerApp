@@ -35,20 +35,37 @@ namespace ImgToTextServerApp
         {
             while (Running)
             {
-                TcpClient client = serverListener.AcceptTcpClient();
-                Debug.WriteLine("Connected with a client");
-                ThreadPool.QueueUserWorkItem(
-                    HandleRequestsAsync, client);
+                try
+                {
+                    AcceptClient();
+                }
+                catch (SocketException sckEx)
+                {
+                    if (Running) Stop();
+                    Debug.WriteLine("SocketException " + sckEx.Message);
+                }
+
             }
+        }
+
+        private void AcceptClient()
+        {
+            TcpClient client = serverListener.AcceptTcpClient();
+            Debug.WriteLine("Connected with a client");
+            ThreadPool.QueueUserWorkItem(
+                HandleRequestsAsync, client);
         }
 
         private void HandleRequestsAsync(object client)
         {
-            var networkStream = ((TcpClient)client).GetStream();
-            string imgPath = ReceiveImg(networkStream);
+            if (Running)
+            {
+                var networkStream = ((TcpClient)client).GetStream();
+                string imgPath = ReceiveImg(networkStream);
 
-            string text = Utils.ImgToText(imgPath);
-            Sender.SendString(networkStream, text);
+                string text = Utils.ImgToText(imgPath);
+                Sender.SendString(networkStream, text);
+            }
         }
 
         private string ReceiveImg(NetworkStream networkStream)
@@ -63,6 +80,7 @@ namespace ImgToTextServerApp
         internal void Stop()
         {
             Running = false;
+            serverListener.Stop();
         }
     }
 }

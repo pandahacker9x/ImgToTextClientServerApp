@@ -61,9 +61,12 @@ namespace ImgToTextClientApp
             Invoke((MethodInvoker)delegate {
                 ShowConfirmDialog("Error", 
                     "Failed to connect to server. Would you like to reconnect", 
-                    () => { }, 
+                    () => {
+                        // Request again
+                        imgPathToGetText = "";
+                        btnGetText_Click(null, null); 
+                    }, 
                     () => { formTextReponseDisplay.Hide(); });
-                btnSelectImg.Enabled = false;
             });
         }
 
@@ -101,7 +104,7 @@ namespace ImgToTextClientApp
 
         private void btnGetText_Click(object sender, EventArgs e)
         {
-            if (selectedImgPath != imgPathToGetText)
+            if (IsNewImgToTextRequest())
             {
                 formTextReponseDisplay.SetWaiting(true);
                 Task.Run(() => client.RequestImgToText(selectedImgPath));
@@ -109,9 +112,15 @@ namespace ImgToTextClientApp
             }
             else
             {
-                formTextReponseDisplay.SetWaiting(false);
+                if (!formTextReponseDisplay.IsWaiting)
+                    formTextReponseDisplay.SetWaiting(false);
             }
             formTextReponseDisplay.ShowDialog();
+        }
+
+        private bool IsNewImgToTextRequest()
+        {
+            return selectedImgPath != imgPathToGetText;
         }
     }
 }

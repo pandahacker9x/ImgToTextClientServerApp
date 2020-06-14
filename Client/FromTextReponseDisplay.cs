@@ -13,7 +13,7 @@ namespace ImgToTextClientApp
 {
     public partial class FormTextReponseDisplay : MaterialSkin.Controls.MaterialForm
     {
-        private bool isWaiting = true;
+        public bool IsWaiting { get; private set; } = true;
 
         public FormTextReponseDisplay()
         {
@@ -41,7 +41,7 @@ namespace ImgToTextClientApp
 
         internal void SetWaiting(bool waiting)
         {
-            if (isWaiting == waiting) return;
+            if (IsWaiting == waiting) return;
             if (waiting)
             {
                 progressBar.Show();
@@ -51,7 +51,8 @@ namespace ImgToTextClientApp
                 progressBar.Hide();
                 richTextBox.Visible = true;
             }
-            isWaiting = waiting;
+            IsWaiting = waiting;
         }
+
     }
 }
