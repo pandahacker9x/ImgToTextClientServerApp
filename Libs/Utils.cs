@@ -1,6 +1,4 @@
-﻿using IronPython.Hosting;
-using Microsoft.Scripting.Hosting;
-using System;
+﻿using System;
 using System.Drawing;
 using System.IO;
 using System.Reflection;
