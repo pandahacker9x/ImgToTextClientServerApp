@@ -83,7 +83,7 @@ namespace ImgToTextClientApp
 
         private void btnSelectImg_Click(object sender, EventArgs e)
         {
-            selectedImgPath = Util.SelectImg();
+            selectedImgPath = Utils.SelectImg();
             
             if (!string.IsNullOrEmpty(selectedImgPath))
             {

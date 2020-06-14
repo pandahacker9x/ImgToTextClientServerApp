@@ -46,7 +46,6 @@ namespace Share
             Page page = engine.Process(img, PageSegMode.Auto);
             string text = page.GetText();
             return text;
-
         }
     }
 }
